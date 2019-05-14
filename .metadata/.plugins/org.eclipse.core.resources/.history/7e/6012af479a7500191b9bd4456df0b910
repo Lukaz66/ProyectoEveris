@@ -1,0 +1,22 @@
+package com.everis.model;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "FAMILIES")
+public class Families {
+
+	@Id
+	@Column(name = "FAMILY_ID")
+	private int fimily_id;
+	
+	@Column(name = "HEAD_OF_FAMILY_PARENT_ID")
+	private int head_of_family_parent_id;
+	
+	@Column(name = "FAMILY_NAME")
+	private String family_name;
+	
+}

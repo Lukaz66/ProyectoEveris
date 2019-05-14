@@ -1,0 +1,14 @@
+package com.everis.models;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public class FamilyMember {
+
+	@Id
+	private Long family_member_id;
+	
+	
+	
+}

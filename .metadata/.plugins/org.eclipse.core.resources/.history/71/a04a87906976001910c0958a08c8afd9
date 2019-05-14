@@ -1,0 +1,137 @@
+package com.everis.models;
+
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "PARENTS")
+public class Parent {
+
+    @Id
+    @Column(name = "PARENT_ID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long parentId;
+    
+    @Column(name = "GENDER",length = 10)
+    private String gender;
+    
+    @Column(name = "FIRST_NAME",length = 50)
+    private String firstName;
+    
+    @Column(name = "MIDDLE_NAME",length = 50)
+    private String middleName;
+    
+    @Column(name = "LAST_NAME",length = 50)
+    private String lastName;
+    
+    @Column(name = "OTHER_PARENT_DETAIL", length = 50)
+    private String otherParentDetail;
+    
+	@ManyToMany(mappedBy = "parents", cascade = CascadeType.PERSIST)
+	private Set<Student> students;
+
+	public Long getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(Long parentId) {
+		this.parentId = parentId;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getMiddleName() {
+		return middleName;
+	}
+
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getOtherParentDetail() {
+		return otherParentDetail;
+	}
+
+	public void setOtherParentDetail(String otherParentDetail) {
+		this.otherParentDetail = otherParentDetail;
+	}
+	
+	public Set<Student> getStudents() {
+		return students;
+	}
+
+	public void setStudent(Set<Student> students) {
+		this.students = students;
+	}
+
+	public Parent() {
+	}
+	
+	public Parent(Long parentId, String gender, String firstName, String middleName, String lastName,
+			String otherParentDetail) {
+		this.parentId = parentId;
+		this.gender = gender;
+		this.firstName = firstName;
+		this.middleName = middleName;
+		this.lastName = lastName;
+		this.otherParentDetail = otherParentDetail;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((parentId == null) ? 0 : parentId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Parent other = (Parent) obj;
+		if (parentId == null) {
+			if (other.parentId != null)
+				return false;
+		} else if (!parentId.equals(other.parentId))
+			return false;
+		return true;
+	}
+
+}

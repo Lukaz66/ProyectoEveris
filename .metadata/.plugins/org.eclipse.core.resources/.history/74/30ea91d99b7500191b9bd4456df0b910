@@ -1,0 +1,5 @@
+package com.everis.repo;
+
+public interface IStudentsRepo {
+
+}

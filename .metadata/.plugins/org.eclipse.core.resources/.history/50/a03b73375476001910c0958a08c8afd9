@@ -1,0 +1,9 @@
+package com.everis.repositories;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.everis.models.Families;
+
+public interface IFamiliesRepo extends JpaRepository<Families, Long> {
+
+}

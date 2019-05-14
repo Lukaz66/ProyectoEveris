@@ -1,0 +1,31 @@
+package com.everis.restcontroller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.everis.model.Students;
+import com.everis.repo.IStudentsRepo;
+
+@RestController
+@RequestMapping("/rest/Students")
+public class RestStudentsController {
+
+	@Autowired
+	private IStudentsRepo repo;
+	
+	@GetMapping
+	public List<Students> get(){
+		return repo.findAll();
+	}
+	
+	@PostMapping
+	public void insert(@RequestBody Students stu) {
+		repo.save(stu);
+	}
+}

@@ -1,0 +1,17 @@
+package com.everis.services;
+
+import java.util.List;
+
+import com.everis.models.Family;
+
+public interface IFamilyService {
+	
+	List<Family> findAll();
+	
+	Family save(Family family);
+	
+	Family update(Family family);
+	
+	void delete(Long id);
+	
+}

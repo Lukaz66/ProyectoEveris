@@ -1,0 +1,93 @@
+package com.everis.models;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "FAMILIES")
+public class Families {
+
+	@Id
+	@Column(name = "FAMILY_ID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long family_id;
+		
+	@Column(name = "FAMILY_NAME")
+	private String family_name;
+
+	@JoinColumn(name = "PARENT_ID", referencedColumnName = "PARENT_ID")
+	@OneToOne(cascade = CascadeType.ALL)
+	private Parents parents;
+
+	
+	public Long getFamily_id() {
+		return family_id;
+	}
+
+	public void setFamily_id(Long family_id) {
+		this.family_id = family_id;
+	}
+
+	public String getFamily_name() {
+		return family_name;
+	}
+
+	public void setFamily_name(String family_name) {
+		this.family_name = family_name;
+	}
+	
+	public Parents getParents() {
+		return parents;
+	}
+
+	public void setParents(Parents parents) {
+		this.parents = parents;
+	}
+
+	public Families() {
+	}
+	
+	public Families(Long family_id, String family_name) {
+		this.family_id = family_id;
+		this.family_name = family_name;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((family_id == null) ? 0 : family_id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Families other = (Families) obj;
+		if (family_id == null) {
+			if (other.family_id != null)
+				return false;
+		} else if (!family_id.equals(other.family_id))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Families [family_id=" + family_id + ", family_name=" + family_name + ", parents=" + parents + "]";
+	}
+
+	
+}

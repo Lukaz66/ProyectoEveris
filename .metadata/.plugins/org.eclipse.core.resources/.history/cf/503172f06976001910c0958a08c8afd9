@@ -1,0 +1,155 @@
+package com.everis.models;
+
+import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "STUDENTS")
+public class Student {
+
+	@Id
+	@Column(name = "STUDENT_ID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long studentId;
+	
+	@Column(name = "GENDER",length = 1)
+	private String gender;
+    
+	@Column(name = "FIRST_NAME", length = 50)
+	private String firstName;
+	
+	@Column(name = "MIDDLE_NAME", length = 50)
+	private String middleName;
+	
+	@Column(name = "LAST_NAME", length = 50)
+	private String lastName;
+	
+	@Column(name = "DATE_OF_BIRTH", length = 50)
+	private String dateOfBirth;
+	
+	@Column(name = "OTHER_STUDENT-DETAIL", length = 50)
+	private String otherStudentDetail;
+	    
+//	@ManyToMany(mappedBy = "students", cascade = CascadeType.PERSIST)
+	
+	@ManyToMany
+	@JoinTable(name = "STUDENT_PARENTS"
+			,joinColumns=@JoinColumn(name="PARENT_ID", referencedColumnName = "PARENT_ID")
+			,inverseJoinColumns = @JoinColumn(name="STUDENT_ID", referencedColumnName = "STUDENT_ID")
+	)
+	private Set<Parent> parent;
+
+	
+	public Long getStudentId() {
+		return studentId;
+	}
+
+	public void setStudentId(Long studentId) {
+		this.studentId = studentId;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getMiddleName() {
+		return middleName;
+	}
+
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(String dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	public String getOtherStudentDetail() {
+		return otherStudentDetail;
+	}
+
+	public void setOtherStudentDetail(String otherStudentDetail) {
+		this.otherStudentDetail = otherStudentDetail;
+	}
+	
+	public Set<Parent> getParent() {
+		return parents;
+	}
+
+	public void setParent(Set<Parent> parents) {
+		this.parents = parents;
+	}
+
+	public Student() {
+	}
+	
+	public Student(Long studentId, String gender, String firstName, String middleName, String lastName,
+			String dateOfBirth, String otherStudentDetail) {
+		this.studentId = studentId;
+		this.gender = gender;
+		this.firstName = firstName;
+		this.middleName = middleName;
+		this.lastName = lastName;
+		this.dateOfBirth = dateOfBirth;
+		this.otherStudentDetail = otherStudentDetail;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((studentId == null) ? 0 : studentId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Student other = (Student) obj;
+		if (studentId == null) {
+			if (other.studentId != null)
+				return false;
+		} else if (!studentId.equals(other.studentId))
+			return false;
+		return true;
+	}
+	
+}

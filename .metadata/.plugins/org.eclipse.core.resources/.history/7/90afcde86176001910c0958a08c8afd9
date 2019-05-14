@@ -1,0 +1,20 @@
+package com.everis.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.everis.models.Family;
+import com.everis.repositories.IFamilyRepo;
+
+public interface IFamilyService {
+	
+	List<Family> findAll();
+	
+	Family save(Family family);
+	
+	Family update(Family family);
+	
+	void delete(Long id);
+	
+}

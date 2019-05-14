@@ -1,0 +1,154 @@
+package com.everis.model;
+
+import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "PARENTS")
+public class Parents {
+
+    @Id
+    @Column(name = "PARENT_ID")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+    private Long parent_id;
+    
+    @Column(name = "GENDER",length = 10)
+    private String gender;
+    
+    @Column(name = "FIRST_NAME",length = 50)
+    private String first_name;
+    
+    @Column(name = "MIDDLE_NAME",length = 50)
+    private String middle_name;
+    
+    @Column(name = "LAST_NAME",length = 50)
+    private String last_name;
+    
+    @Column(name = "PHONE_NUMBER",length = 50)
+    private String phone_number;
+
+    @Column(name = "DIRECTION",length = 50)
+    private String direction;
+    
+	@ManyToMany
+	@JoinTable(name = "STUDENT_PARENTS"
+			,joinColumns=@JoinColumn(name="PARENT_ID")
+			,inverseJoinColumns = @JoinColumn(name="STUDENT_ID")
+	)
+	private Set<Students> students;
+	
+	
+    public Long getParent_id() {
+		return parent_id;
+	}
+
+	public void setParent_id(Long parent_id) {
+		this.parent_id = parent_id;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getFirst_name() {
+		return first_name;
+	}
+
+	public void setFirst_name(String first_name) {
+		this.first_name = first_name;
+	}
+
+	public String getMiddle_name() {
+		return middle_name;
+	}
+
+	public void setMiddle_name(String middle_name) {
+		this.middle_name = middle_name;
+	}
+
+	public String getLast_name() {
+		return last_name;
+	}
+
+	public void setLast_name(String last_name) {
+		this.last_name = last_name;
+	}
+
+	public String getPhone_number() {
+		return phone_number;
+	}
+
+	public void setPhone_number(String phone_number) {
+		this.phone_number = phone_number;
+	}
+
+	public String getDirection() {
+		return direction;
+	}
+
+	public void setDirection(String direction) {
+		this.direction = direction;
+	}
+
+	public Parents() {
+	}
+
+	public Parents(Long parent_id, String gender, String first_name, String middle_name, String last_name,
+			String phone_number, String direction) {
+		this.parent_id = parent_id;
+		this.gender = gender;
+		this.first_name = first_name;
+		this.middle_name = middle_name;
+		this.last_name = last_name;
+		this.phone_number = phone_number;
+		this.direction = direction;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((parent_id == null) ? 0 : parent_id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Parents other = (Parents) obj;
+		if (parent_id == null) {
+			if (other.parent_id != null)
+				return false;
+		} else if (!parent_id.equals(other.parent_id))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Parents [parent_id=" + parent_id + ", gender=" + gender + ", first_name=" + first_name
+				+ ", middle_name=" + middle_name + ", last_name=" + last_name + ", phone_number=" + phone_number
+				+ ", direction=" + direction + ", students=" + students + "]";
+	}
+	
+	
+	
+}

@@ -1,0 +1,15 @@
+package com.everis.model;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public class Student_Parents {
+
+	@Id
+	private int student_id;
+	
+	@Id
+    private int parent_id;
+	
+}
