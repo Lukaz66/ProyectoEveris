@@ -1,0 +1,59 @@
+package com.everis.services.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.everis.models.Family;
+import com.everis.models.FamilyMember;
+import com.everis.repositories.IFamilyMemberRepo;
+import com.everis.repositories.IFamilyRepo;
+import com.everis.services.IFamilyService;
+
+@Service
+public class FamilyServiceImpl implements IFamilyService {
+
+	@Autowired
+	private IFamilyRepo familyRepo;
+	
+	@Autowired
+	private IFamilyMemberRepo familyMemberRepo;
+	
+	@Override
+	public List<Family> findAll() {
+		return familyRepo.findAll();
+	}
+
+	@Override
+	public Family save(Family family) {
+		return familyRepo.save(family);
+	}
+//	
+//	 public void put(Parent parent, int parentId) {
+//		    parentDao.findById(parentId).ifPresent((p) -> {
+//		      parent.setParentId(parentId);
+//		      parentDao.save(parent);
+//		    });
+//		  }
+
+	@Override
+	public void update(Family family, Long familyId) {
+			familyRepo.findById(familyId).ifPresent((f) -> {
+				family.setFamilyId(familyId);
+				familyRepo.save(family);
+			});
+	}
+
+	@Override
+	public void delete(Long id) {
+		familyRepo.deleteById(id);
+	}
+	
+	@Override
+	public List<FamilyMember> findById(Long id) {
+		return familyMemberRepo.findByFamilyIdFamilyId(id);		
+	}
+}

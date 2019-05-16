@@ -1,0 +1,41 @@
+package com.everis;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
+
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import com.everis.models.Parent;
+import com.everis.repositories.IParentRepo;
+import com.everis.services.impl.ParentServiceImpl;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class ProjectEverisApplicationTests {
+
+	@Autowired
+	private ParentServiceImpl parentS;
+	
+	@MockBean
+	private IParentRepo parentR;
+
+//	@Test
+//	public void getParentTest() {
+//		when(parentR.findAll()).thenReturn(Stream 
+//				.of(new Parent("M", "Slash", "Slashito", "RedHot", "Guitarrista")).collect(Collectors.toList());
+//		assertEquals(2, parentS.getClass().size());
+//	}
+	
+	@Test
+	public void contextLoads() {
+	}
+
+}

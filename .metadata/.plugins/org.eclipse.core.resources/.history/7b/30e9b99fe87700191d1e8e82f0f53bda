@@ -1,0 +1,65 @@
+package com.everis.models;
+
+import com.everis.models.Family;
+
+import lombok.Data;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+/** Proyecto Everis.
+ * Esta clase define las variables de FamilyMember
+ * @author Llanos Canahuire Waldo.
+ * @version 15/05/2019
+ */
+@Entity
+@Table(name = "FAMILYMEMBER")
+@Data
+public class FamilyMember {
+
+	/**
+	 * Id de FamilyMember, PK el id es auto increment.
+	 */
+	@Id
+	@Column(name = "FAMILY_MEMBER_ID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long familyMemberId;
+	
+	/**
+	 * Unión de las tablas FamilyMember con Family.
+	 * ManyToOne: muchos miembros de familia pueden tener una familia.  
+	 */
+	@JoinColumn(name = "FAMILY_ID", referencedColumnName = "FAMILY_ID")
+	@ManyToOne
+	private Family familyId;	
+	
+	/**
+	 * Variable string que define si el miembro de la familia va a ser parent o student.
+	 */
+	@Column(name = "PARENT_OR_STUDENT_MEMBER")
+	private String parentOrStudentMember;
+	
+	/**
+	 * Unión de las tablas FamilyMember con Parent.
+	 * La unión es para obtener el id de Parent.
+	 */
+	@JoinColumn(name = "PARENT_ID", referencedColumnName = "PARENT_ID")
+	@OneToOne
+	private Parent parentId;
+	
+	/**
+	 * Unión de las tablas FamilyMember con Student.
+	 * La unión es para obtener el id de Student.
+	 */
+	@JoinColumn(name = "STUDENT_ID", referencedColumnName = "STUDENT_ID")
+	@OneToOne
+	private Student studentId;
+
+}

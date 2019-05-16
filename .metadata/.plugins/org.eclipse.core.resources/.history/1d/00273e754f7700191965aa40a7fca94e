@@ -1,0 +1,19 @@
+package com.everis.services;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.everis.models.FamilyMember;
+
+@Service
+public interface IFamilyMemberService {
+	
+	List<FamilyMember> findAll();
+	
+	FamilyMember save(FamilyMember familyMember);
+	
+	FamilyMember update(FamilyMember familyMember);
+	
+	void delete(Long id);
+}

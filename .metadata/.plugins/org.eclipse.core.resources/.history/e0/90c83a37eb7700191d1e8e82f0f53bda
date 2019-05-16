@@ -1,0 +1,21 @@
+package com.everis.services;
+
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.everis.models.Parent;
+
+@Service
+public interface IParentService {
+	
+	List<Parent> findAll();
+	
+	ResponseEntity<Parent> save(Parent parent);
+	
+	ResponseEntity<Parent> update(Parent parent);
+	
+	void delete(Long id);
+	
+}

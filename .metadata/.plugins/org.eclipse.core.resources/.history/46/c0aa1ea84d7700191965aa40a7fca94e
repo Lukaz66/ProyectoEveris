@@ -1,0 +1,26 @@
+package com.everis.services;
+
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.everis.models.Family;
+import com.everis.models.FamilyMember;
+
+@Service
+public interface IFamilyService {
+	
+	List<FamilyMember> findById(Long id);
+
+	List<Family> findAll();
+
+	ResponseEntity<Family> save(Family family);
+//	Family save(Family family);
+	
+	Family update(Family family);
+	
+	void delete(Long id);
+	
+}

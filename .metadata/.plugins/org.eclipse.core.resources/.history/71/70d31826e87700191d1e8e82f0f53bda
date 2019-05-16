@@ -1,0 +1,59 @@
+package com.everis.models;
+
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.Data;
+
+/** Proyecto Everis.
+ * Esta clase define las variables de la clase.
+ * @author Llanos Canahuire Waldo.
+ * @version 15/05/2019
+ */
+@Entity
+@Table(name = "FAMILIES")
+@Data
+public class Family {
+
+	/**
+	 * Id de la Familia con JPA, el id el PK y auto incrementada.
+	 */
+	@Id
+	@Column(name = "FAMILY_ID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long familyId;
+		
+	/**
+	 * Nombre de la Familia con JPA.
+	 */
+	@Column(name = "FAMILY_NAME", length = 50)
+	private String familyName;
+
+	/**
+	 * Unión de dos tablas con OneToOne para definir la cabeza de la familia con 
+	 * un un ID de Parent.
+	 */
+	@JoinColumn(name = "HEAD_OF_FAMILY", referencedColumnName = "PARENT_ID")
+	@OneToOne
+	private Parent headOfFamily;
+	
+	/**
+	 * Unión de dos tablas con OneToMany para el listado con FamilyMember.
+	 * OneToMany: una familia puede tener varios miembros.
+	 */
+	@JsonIgnore
+	@OneToMany(mappedBy = "familyId")
+	private List<FamilyMember> familyMembers;
+	
+}

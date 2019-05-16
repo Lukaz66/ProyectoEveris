@@ -1,0 +1,91 @@
+package com.everis.models;
+
+import com.everis.models.Family;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "FAMILYMEMBER")
+public class FamilyMember {
+
+	@Id
+	@Column(name = "FAMILY_MEMBER_ID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long familyMemberId;
+	
+	@Column(name = "PARENT_OR_STUDENT_MEMBER")
+	private String parentOrStudentMember;
+	
+	@JoinColumn(name = "PARENT_ID", referencedColumnName = "PARENT_ID")
+	@OneToOne
+	private Parent parentId;
+	
+	@JoinColumn(name = "STUDENT_ID", referencedColumnName = "STUDENT_ID")
+	@OneToOne
+	private Student studentId;
+	
+	@JoinColumn(name = "FAMILY_ID", referencedColumnName = "FAMILY_ID")
+	@ManyToOne
+	private Family familyId;
+
+	public Long getFamilyMemberId() {
+		return familyMemberId;
+	}
+
+	public void setFamilyMemberId(Long familyMemberId) {
+		this.familyMemberId = familyMemberId;
+	}
+
+	public String getParentOrStudentMember() {
+		return parentOrStudentMember;
+	}
+
+	public void setParentOrStudentMember(String parentOrStudentMember) {
+		this.parentOrStudentMember = parentOrStudentMember;
+	}
+
+	public Parent getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(Parent parentId) {
+		this.parentId = parentId;
+	}
+
+	public Student getStudentId() {
+		return studentId;
+	}
+
+	public void setStudentId(Student studentId) {
+		this.studentId = studentId;
+	}
+
+	public Family getFamilyId() {
+		return familyId;
+	}
+
+	public void setFamilyId(Family familyId) {
+		this.familyId = familyId;
+	}
+
+	public FamilyMember() {
+	}
+
+	public FamilyMember(Long familyMemberId, String parentOrStudentMember, Parent parentId, Student studentId,
+			Family familyId) {
+		this.familyMemberId = familyMemberId;
+		this.parentOrStudentMember = parentOrStudentMember;
+		this.parentId = parentId;
+		this.studentId = studentId;
+		this.familyId = familyId;
+	}
+	
+}

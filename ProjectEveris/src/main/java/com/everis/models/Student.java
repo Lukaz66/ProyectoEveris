@@ -12,117 +12,53 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import lombok.Data;
+
+/**
+ * Proyecto: Clase para almacenar funciones útiles y variables necesarias. Esta
+ * clase define las variables en el Student Table
+ * 
+ * @author Llanos_Canahuire_Waldo
+ * @version 15/05/2019
+ * @since V 1.0
+ */
 @Entity
 @Table(name = "STUDENTS")
+@Data
 public class Student {
 
-	@Id
-	@Column(name = "STUDENT_ID")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long studentId;
-	
-	@Column(name = "GENDER",length = 1)
-	private String gender;
-    
-	@Column(name = "FIRST_NAME", length = 50)
-	private String firstName;
-	
-	@Column(name = "MIDDLE_NAME", length = 50)
-	private String middleName;
-	
-	@Column(name = "LAST_NAME", length = 50)
-	private String lastName;
-	
-	@Column(name = "DATE_OF_BIRTH", length = 50)
-	private String dateOfBirth;
-	
-	@Column(name = "OTHER_STUDENT_DETAIL", length = 50)
-	private String otherStudentDetail;
-	    	
-	@ManyToMany
-	@JoinTable(name = "STUDENT_PARENTS"
-			,joinColumns=@JoinColumn(name="STUDENT_ID", referencedColumnName = "STUDENT_ID")
-			,inverseJoinColumns = @JoinColumn(name="PARENT_ID", referencedColumnName = "PARENT_ID")
-	)
-	private Set<Parent> parents;
+  /**
+   * Lista de las variables utilizadas para generar el Student table. Use la
+   * anotación ManyToMany para relacionar dos tablas (Student to Parent). Generar
+   * la tabla Student_Parent a través de la persistencia JoinTable.
+   */
+  @Id
+  @Column(name = "STUDENT_ID")
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private long studentId;
 
-	
-	public Long getStudentId() {
-		return studentId;
-	}
+  @Column(name = "GENDER", length = 1)
+  private String gender;
 
-	public void setStudentId(Long studentId) {
-		this.studentId = studentId;
-	}
+  @Column(name = "FIRST_NAME", length = 50)
+  private String firstName;
 
-	public String getGender() {
-		return gender;
-	}
+  @Column(name = "MIDDLE_NAME", length = 50)
+  private String middleName;
 
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
+  @Column(name = "LAST_NAME", length = 50)
+  private String lastName;
 
-	public String getFirstName() {
-		return firstName;
-	}
+  @Column(name = "DATE_OF_BIRTH", length = 50)
+  private String dateOfBirth;
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+  @Column(name = "OTHER_STUDENT_DETAIL", length = 50)
+  private String otherStudentDetail;
 
-	public String getMiddleName() {
-		return middleName;
-	}
+  @ManyToMany
+  @JoinTable(name = "STUDENT_PARENTS", joinColumns = @JoinColumn(name = "STUDENT_ID",
+      referencedColumnName = "STUDENT_ID"), inverseJoinColumns = @JoinColumn(name = "PARENT_ID", 
+      referencedColumnName = "PARENT_ID"))
+  private Set<Parent> parents;
 
-	public void setMiddleName(String middleName) {
-		this.middleName = middleName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getDateOfBirth() {
-		return dateOfBirth;
-	}
-
-	public void setDateOfBirth(String dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
-	}
-
-	public String getOtherStudentDetail() {
-		return otherStudentDetail;
-	}
-
-	public void setOtherStudentDetail(String otherStudentDetail) {
-		this.otherStudentDetail = otherStudentDetail;
-	}
-	
-	public Set<Parent> getParent() {
-		return parents;
-	}
-
-	public void setParent(Set<Parent> parents) {
-		this.parents = parents;
-	}
-
-	public Student() {
-	}
-	
-	public Student(Long studentId, String gender, String firstName, String middleName, String lastName,
-			String dateOfBirth, String otherStudentDetail) {
-		this.studentId = studentId;
-		this.gender = gender;
-		this.firstName = firstName;
-		this.middleName = middleName;
-		this.lastName = lastName;
-		this.dateOfBirth = dateOfBirth;
-		this.otherStudentDetail = otherStudentDetail;
-	}
-	
 }

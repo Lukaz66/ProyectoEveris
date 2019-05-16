@@ -1,0 +1,84 @@
+package com.everis.controllers;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.everis.models.Family;
+import com.everis.models.FamilyMember;
+import com.everis.services.IFamilyService;
+
+/** Proyecto_Everis.
+ * Esta_clase_define_los_metodos_del_servicio_que_consume Family
+ * @author: Llanos_Canahuire_Waldo
+ * @version: 15/05/2019
+ * 
+ */
+
+@RestController
+@RequestMapping("/api/V1.0/families")
+public class FamilyController {
+
+	/**
+	 * Inyecccion_de_dependencia_de IFamilyService.
+	 */
+	@Autowired
+	private IFamilyService family;
+
+	/**
+	 * Retorna_la_lista_entera_de_familia 
+	 * @return listado de todas las Familias.
+	 */
+	@GetMapping
+	public List<Family> get(){
+		return family.findAll();
+	}	
+	
+	/**
+	 * Getter
+	 * @param id define que el listado va a ser por el parametro Id.
+	 * @return Retorna la lista de la familia por el Id definido.
+	 */
+	@GetMapping("/{id}")
+	public List<FamilyMember> getFamily(@PathVariable("id") Long id){
+		return family.findById(id);
+	}
+	
+	/**
+	 * Insert : Save
+	 * @param fam define la clase del modelo Family.
+	 * @return guarda los datos ingresados en la base de datos.
+	 */
+	@PostMapping
+	public ResponseEntity<Family> save(@RequestBody Family fam) {
+		 return family.save(fam);
+	}
+	
+	/**
+	 * Actualiza_los_campos_de_familia
+	 * @param fam define la clase del modelo Family.
+	 * @return actualiza los datos que ya estan guardados.
+	 */
+	@PutMapping
+	public ResponseEntity<Family> update(@RequestBody Family fam) {
+		return family.save(fam);
+	}
+	
+	/**
+	 * Elimina_familia_por_Id
+	 * @param id define la variable para la eliminación por id.
+	 */
+	@DeleteMapping(value = "/{id}")
+	public void delete(@PathVariable("id") Long id) {
+		family.delete(id);
+	}
+}

@@ -1,0 +1,31 @@
+package com.everis.models;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "FAMILYMEMBER")
+public class FamilyMember {
+
+	@Id
+	@Column(name = "FAMILY_MEMBER_ID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long familyMemberId;
+	
+	@Column(name = "PARENT_OR_STUDENT_MEMBER")
+	private String parentOrStudentMember;
+	
+	@JoinColumn(name = "PARENT_ID", referencedColumnName = "PARENT_ID")
+	@OneToOne
+	private Parent parentId;
+	
+	@JoinColumn(name = "STUDENT_ID", referencedColumnName = "STUDENT_ID")
+	@OneToOne
+	private Student studentId;
+}

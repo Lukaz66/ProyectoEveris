@@ -1,0 +1,39 @@
+package com.everis.services.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.everis.models.FamilyMember;
+import com.everis.repositories.IFamilyMemberRepo;
+import com.everis.services.IFamilyMemberService;
+
+@Service
+public class FamilyMemberServiceImpl implements IFamilyMemberService{
+
+	@Autowired
+	private IFamilyMemberRepo familyMemberRepo;
+	
+	@Override
+	public List<FamilyMember> findAll() {
+		return familyMemberRepo.findAll();
+	}
+
+	@Override
+	public FamilyMember save(FamilyMember familyMember) {
+		return familyMemberRepo.save(familyMember);
+	}
+
+	@Override
+	public FamilyMember update(FamilyMember familyMember) {
+		return familyMemberRepo.save(familyMember);
+	}
+
+	@Override
+	public void delete(Long id) {
+		familyMemberRepo.deleteById(id);
+	}
+
+	
+}

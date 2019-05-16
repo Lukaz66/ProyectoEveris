@@ -1,0 +1,82 @@
+package com.everis.models;
+
+import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+import lombok.Data;
+
+/** Proyecto Everis
+ * Esta clase define las variables de la tabla student
+ * @author Llanos Canahuire Waldo.
+ * @version 15/05/2019
+ */
+@Entity
+@Table(name = "STUDENTS")
+@Data
+public class Student {
+
+	/**
+	 * Variable que define el id de student, el id es PK auto increment.  
+	 */
+	@Id
+	@Column(name = "STUDENT_ID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long studentId;
+	
+	/**
+	 * Variable que define el genero de student.
+	 */
+	@Column(name = "GENDER",length = 1)
+	private String gender;
+    
+	/**
+	 * Variable que define el primer nombre de student.
+	 */
+	@Column(name = "FIRST_NAME", length = 50)
+	private String firstName;
+	
+	/**
+	 * Variable que define el segundo nombre de student.
+	 */
+	@Column(name = "MIDDLE_NAME", length = 50)
+	private String middleName;
+	
+	/**
+	 * Variable que define el last name(apellido) de student.
+	 */
+	@Column(name = "LAST_NAME", length = 50)
+	private String lastName;
+	
+	/**
+	 * Variable que define el dia del cumpleaños de student.
+	 */
+	@Column(name = "DATE_OF_BIRTH", length = 50)
+	private String dateOfBirth;
+	
+	/**
+	 * Variable que define cualquier otro detalle de student.
+	 */
+	@Column(name = "OTHER_STUDENT_DETAIL", length = 50)
+	private String otherStudentDetail;
+	    
+	/**
+	 * Unión de las tablas student a parent para generar la tabla student_parent por el id.
+	 * ManyToMany: un student puede tener muchos padres.
+	 */
+	@ManyToMany
+	@JoinTable(name = "STUDENT_PARENTS"
+			,joinColumns=@JoinColumn(name="STUDENT_ID", referencedColumnName = "STUDENT_ID")
+			,inverseJoinColumns = @JoinColumn(name="PARENT_ID", referencedColumnName = "PARENT_ID")
+	)
+	private Set<Parent> parents;
+
+}

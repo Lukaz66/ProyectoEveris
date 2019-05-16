@@ -1,0 +1,74 @@
+package com.everis.models;
+
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.Data;
+
+/** Proyecto Everis.
+ * Esta clase define las varibles de la tabla Parents
+ * @author Llanos Canahuire Waldo
+ * @version 15/05/2019
+ */
+@Entity
+@Table(name = "PARENTS")
+@Data
+public class Parent {
+
+	/**
+	 * Id de Parent, con la Pk auto incrementada.
+	 */
+    @Id
+    @Column(name = "PARENT_ID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long parentId;
+    
+    /**
+     * Variable de genero del Parent.
+     */
+    @Column(name = "GENDER",length = 1)
+    private String gender;
+    
+    /**
+     * Variable que indica el primer nombre de Parent.
+     */
+    @Column(name = "FIRST_NAME",length = 50)
+    private String firstName;
+    
+    /**
+     * Variable que indica el segundo nombre de Parent.
+     */
+    @Column(name = "MIDDLE_NAME",length = 50)
+    private String middleName;
+    
+    /**
+     * Variable que indica el lastName(apellido) de Parent.
+     */
+    @Column(name = "LAST_NAME",length = 50)
+    private String lastName;
+    
+    /**
+     * Variable que indica cualquier otro detalle del Parent.
+     */
+    @Column(name = "OTHER_PARENT_DETAIL", length = 50)
+    private String otherParentDetail;
+    
+    /**
+     * Unión de las tablas parent y student.
+     * ManyToMany: un parent puede tener muchos students.
+     */
+    @JsonIgnore
+	@ManyToMany(mappedBy = "parents", cascade = CascadeType.PERSIST)
+	private Set<Student> students;
+
+}

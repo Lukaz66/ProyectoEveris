@@ -1,0 +1,21 @@
+package com.everis.services;
+
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.everis.models.Student;
+
+@Service
+public interface IStudentService {
+
+	List<Student> findAll();
+	
+	ResponseEntity<Student> save(Student student);
+	
+	ResponseEntity<Student> update(Student student);
+	
+	void delete(Long id);
+	
+}

@@ -1,5 +1,7 @@
 package com.everis.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -11,101 +13,47 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import lombok.Data;
+
+/**
+ * Proyecto: Clase para almacenar funciones útiles y variables necesarias. Esta
+ * clase define las variables en el Parent Table
+ * 
+ * @author Llanos_Canahuire_Waldo
+ * @version 15/05/2019
+ * @since V 1.0
+ */
 @Entity
 @Table(name = "PARENTS")
+@Data
 public class Parent {
 
-    @Id
-    @Column(name = "PARENT_ID")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long parentId;
-    
-    @Column(name = "GENDER",length = 1)
-    private String gender;
-    
-    @Column(name = "FIRST_NAME",length = 50)
-    private String firstName;
-    
-    @Column(name = "MIDDLE_NAME",length = 50)
-    private String middleName;
-    
-    @Column(name = "LAST_NAME",length = 50)
-    private String lastName;
-    
-    @Column(name = "OTHER_PARENT_DETAIL", length = 50)
-    private String otherParentDetail;
-    
-    
-	@ManyToMany(mappedBy = "parents", cascade = CascadeType.PERSIST)
-	private Set<Student> students;
+  /**
+   * Lista de las variables utilizadas para generar el Parent table. Use la
+   * anotación ManyToMany para relacionar dos tablas (Parent to Student).
+   */
+  @Id
+  @Column(name = "PARENT_ID")
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private long parentId;
 
-	public Long getParentId() {
-		return parentId;
-	}
+  @Column(name = "GENDER", length = 1)
+  private String gender;
 
-	public void setParentId(Long parentId) {
-		this.parentId = parentId;
-	}
+  @Column(name = "FIRST_NAME", length = 50)
+  private String firstName;
 
-	public String getGender() {
-		return gender;
-	}
+  @Column(name = "MIDDLE_NAME", length = 50)
+  private String middleName;
 
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
+  @Column(name = "LAST_NAME", length = 50)
+  private String lastName;
 
-	public String getFirstName() {
-		return firstName;
-	}
+  @Column(name = "OTHER_PARENT_DETAIL", length = 50)
+  private String otherParentDetail;
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getMiddleName() {
-		return middleName;
-	}
-
-	public void setMiddleName(String middleName) {
-		this.middleName = middleName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getOtherParentDetail() {
-		return otherParentDetail;
-	}
-
-	public void setOtherParentDetail(String otherParentDetail) {
-		this.otherParentDetail = otherParentDetail;
-	}
-	
-	public Set<Student> getStudents() {
-		return students;
-	}
-
-	public void setStudent(Set<Student> students) {
-		this.students = students;
-	}
-
-	public Parent() {
-	}
-	
-	public Parent(Long parentId, String gender, String firstName, String middleName, String lastName,
-			String otherParentDetail) {
-		this.parentId = parentId;
-		this.gender = gender;
-		this.firstName = firstName;
-		this.middleName = middleName;
-		this.lastName = lastName;
-		this.otherParentDetail = otherParentDetail;
-	}
+  @JsonIgnore
+  @ManyToMany(mappedBy = "parents", cascade = CascadeType.PERSIST)
+  private Set<Student> students;
 
 }

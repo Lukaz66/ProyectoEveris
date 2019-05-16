@@ -1,0 +1,56 @@
+package com.everis;
+
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.validation.BeanPropertyBindingResult;
+import org.springframework.validation.BindingResult;
+
+import com.everis.controllers.ParentController;
+import com.everis.models.Parent;
+import com.everis.services.impl.ParentServiceImpl;
+
+@RunWith(SpringRunner.class)
+@WebMvcTest(value = ParentController.class, secure = false)
+@SpringBootTest
+public class ParentControllerTest {
+
+//	@Autowired
+//	private MockMvc mockMvc;
+	
+	@MockBean
+	private ParentServiceImpl parentService;
+	
+	@Test
+	public void pruebaOk() {
+		Parent parent = new Parent();
+		parent.setGender("F");
+		parent.setFirstName("Mai");
+		parent.setMiddleName("Miku");
+		parent.setLastName("Nakano");
+		parent.setOtherParentDetail("Cantante");
+		BindingResult result = new BeanPropertyBindingResult(parent, "parent");
+		parentService.findAll();
+		Assert.assertEquals(false, result.hasErrors());
+	}
+
+	@Test
+	public void pruebaNOOK() {
+		Parent parent = new Parent();
+		parent.setGender("F");
+		parent.setFirstName("Rias");
+		parent.setMiddleName("Miku");
+		parent.setLastName("Nakano");
+		parent.setOtherParentDetail("Cantante");
+		BindingResult result = new BeanPropertyBindingResult(parent, "parent");
+		parentService.findAll();
+		Assert.assertEquals(false, result.hasErrors());
+	}
+	
+}

@@ -1,0 +1,53 @@
+package com.everis.services.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.everis.models.FamilyMember;
+import com.everis.repositories.IFamilyMemberRepo;
+import com.everis.services.IFamilyMemberService;
+
+@Service
+public class FamilyMemberServiceImpl implements IFamilyMemberService{
+
+  @Autowired
+  private IFamilyMemberRepo familyMemberRepo;
+
+  @Override
+  public List<FamilyMember> findAll() {
+    return familyMemberRepo.findAll();
+  }
+
+	@Override
+	public ResponseEntity<FamilyMember> save(FamilyMember familyMember) {
+	
+		if (familyMemberRepo.findById(familyMember.getFamilyMemberId()) == null) {
+			familyMemberRepo.save(familyMember);
+			return new ResponseEntity<FamilyMember>(HttpStatus.CREATED);
+		} else {
+			return new ResponseEntity<FamilyMember>(HttpStatus.METHOD_NOT_ALLOWED);
+		}
+		
+	}
+
+	@Override
+	public ResponseEntity<FamilyMember> update(FamilyMember familyMember) {
+		if (familyMemberRepo.findById(familyMember.getFamilyMemberId()) != null) {
+			familyMemberRepo.save(familyMember);
+			return new ResponseEntity<FamilyMember>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<FamilyMember>(HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@Override
+	public void delete(Long id) {
+		familyMemberRepo.deleteById(id);
+	}
+
+	
+}
