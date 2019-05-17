@@ -12,6 +12,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 /**
@@ -55,6 +57,7 @@ public class Student {
   @Column(name = "OTHER_STUDENT_DETAIL", length = 50)
   private String otherStudentDetail;
 
+  @JsonIgnore
   @ManyToMany
   @JoinTable(name = "STUDENT_PARENTS", joinColumns = @JoinColumn(name = "STUDENT_ID",
       referencedColumnName = "STUDENT_ID"), inverseJoinColumns = @JoinColumn(name = "PARENT_ID", 

@@ -37,7 +37,7 @@ public class StudentServiceImpl implements IStudentService {
 	public ResponseEntity<Student> save(Student student) {
 		if (studentRepo.findById(student.getStudentId()) == null) {
 			studentRepo.save(student);
-			return new ResponseEntity<Student>(HttpStatus.CREATED);
+			return new ResponseEntity<Student>(student, HttpStatus.CREATED);
 		} else {
 			return new ResponseEntity<Student>(HttpStatus.METHOD_NOT_ALLOWED);
 		}
@@ -47,7 +47,7 @@ public class StudentServiceImpl implements IStudentService {
 	public ResponseEntity<Student> update(Student student) {
 		if (studentRepo.findById(student.getStudentId()) != null) {
 			studentRepo.save(student);
-			return new ResponseEntity<Student>(HttpStatus.OK);
+			return new ResponseEntity<Student>(HttpStatus.ACCEPTED);
 		} else {
 			return new ResponseEntity<Student>(HttpStatus.NOT_FOUND);
 		}

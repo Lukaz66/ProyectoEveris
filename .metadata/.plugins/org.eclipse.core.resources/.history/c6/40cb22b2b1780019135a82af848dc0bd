@@ -1,0 +1,49 @@
+package com.everis.services.impl;
+
+import static org.junit.Assert.*;
+import static org.mockito.BDDMockito.given;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import com.everis.models.Student;
+import com.everis.repositories.IStudentRepo;
+
+@RunWith(MockitoJUnitRunner.class)
+public class StudentServiceImplTest {
+
+  @InjectMocks
+  private StudentServiceImpl studentService;
+  
+  @Mock
+  private IStudentRepo studentRepo;
+  
+  @Test
+  public void testFindAll() {
+    List<Student> list = new ArrayList<>();
+    given(studentRepo.findAll()).willReturn(list);
+    assertEquals(list, studentService.findAll());
+  }
+
+  @Test
+  public void testSave() {
+    fail("Not yet implemented");
+  }
+
+  @Test
+  public void testUpdate() {
+    fail("Not yet implemented");
+  }
+
+  @Test
+  public void testDelete() {
+    fail("Not yet implemented");
+  }
+
+}

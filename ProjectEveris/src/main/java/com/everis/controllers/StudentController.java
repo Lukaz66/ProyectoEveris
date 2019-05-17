@@ -20,8 +20,10 @@ import com.everis.services.IStudentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-/** Proyecto: Clase para consumir los servicios e implementar métodos de IStudentService.
- * Esta clase consume los métodos que realiza el servicio..
+/**
+ * Proyecto: Clase para consumir los servicios e implementar métodos de
+ * IStudentService. Esta clase consume los métodos que realiza el servicio..
+ * 
  * @author Llanos_Canahuire_Waldo
  * @version 15/05/2019
  * @since V 1.0
@@ -31,57 +33,61 @@ import io.swagger.annotations.ApiOperation;
 @Api(tags = "CRUD de datos Student")
 public class StudentController {
 
-	Logger log = LoggerFactory.getLogger(this.getClass());
+  Logger log = LoggerFactory.getLogger(this.getClass());
 
-   /**
-    * La anotación Autowired para la inyección de dependencia de IStudentService.
-	*/
-	@Autowired
-	private IStudentService studentService;
-		
-	/**
-	 * Metodo para obtener la lista de Student
-	 * @return studentService.findAll() lista de todos los student
-	 */
-	@ApiOperation(value = "Lista Student")		
-	@GetMapping
-	public List<Student> get(){
-		log.info("Los Student fueron listados");
-		return studentService.findAll();
-	}
-	
-	/**
-	 * Metodo para insertar un nuevo Student
-	 * @param Student es almacenada en el modelo. 
-	 * @return studentService.save(stu) nuevo objeto insertado.
-	 */
-	@ApiOperation(value = "Inserta Student")		
-	@PostMapping
-	public void save(@RequestBody Student stu) {
-		log.info("Student fue insertado");
-		studentService.save(stu);
-	}
-	
-	/**
-	 * Metodo para actualizar un student existente.
-	 * @param student es para actualizar un objeto existente del modelo.
-	 * @return studentService.save(stu) Student actualizado.
-	 */
-	@ApiOperation(value = "Actualiza Student")		
-	@PutMapping
-	public void update(@RequestBody Student stu) {
-		log.info("Student fue actualizado");
-		studentService.save(stu);
-	}
-	
-	/**
-	 * Metodo para eliminar un student existente.
-	 * @param id es para eliminar un objeto del modelo existente por el Id.
-	 */	
-	@ApiOperation(value = "Elimina Student")		
-	@DeleteMapping(value = "/{id}")
-	public void delete(@PathVariable ("id") Long id) {
-		log.warn("Student eliminado");
-		studentService.delete(id);
-	}
+  /**
+   * La anotación Autowired para la inyección de dependencia de IStudentService.
+   */
+  @Autowired
+  private IStudentService studentService;
+
+  /**
+   * Metodo para obtener la lista de Student
+   * 
+   * @return studentService.findAll() lista de todos los student
+   */
+  @ApiOperation(value = "Lista Student")
+  @GetMapping
+  public List<Student> get() {
+    log.info("Los Student fueron listados");
+    return studentService.findAll();
+  }
+
+  /**
+   * Metodo para insertar un nuevo Student
+   * 
+   * @param Student es almacenada en el modelo.
+   * @return studentService.save(stu) nuevo objeto insertado.
+   */
+  @ApiOperation(value = "Inserta Student")
+  @PostMapping
+  public void save(@RequestBody Student stu) {
+    log.info("Student fue insertado");
+    studentService.save(stu);
+  }
+
+  /**
+   * Metodo para actualizar un student existente.
+   * 
+   * @param student es para actualizar un objeto existente del modelo.
+   * @return studentService.save(stu) Student actualizado.
+   */
+  @ApiOperation(value = "Actualiza Student")
+  @PutMapping
+  public void update(@RequestBody Student stu) {
+    log.info("Student fue actualizado");
+    studentService.update(stu);
+  }
+
+  /**
+   * Metodo para eliminar un student existente.
+   * 
+   * @param id es para eliminar un objeto del modelo existente por el Id.
+   */
+  @ApiOperation(value = "Elimina Student")
+  @DeleteMapping(value = "/{id}")
+  public void delete(@PathVariable("id") Long id) {
+    log.warn("Student eliminado");
+    studentService.delete(id);
+  }
 }

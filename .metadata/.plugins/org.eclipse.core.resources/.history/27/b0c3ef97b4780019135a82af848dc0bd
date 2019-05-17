@@ -1,0 +1,46 @@
+package com.everis.services.impl;
+
+import static org.junit.Assert.*;
+import static org.mockito.BDDMockito.given;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+
+import com.everis.models.Parent;
+import com.everis.repositories.IParentRepo;
+
+public class ParentServiceImplTest {
+
+  @InjectMocks
+  private ParentServiceImpl parentService;
+  
+  @Mock
+  private IParentRepo parentRepo;
+  
+  @Test
+  public void testFindAll() {
+    List<Parent> list = new ArrayList<>();
+    given(parentRepo.findAll()).willReturn(list);
+    assertEquals(list, parentService.findAll());
+  }
+
+  @Test
+  public void testSave() {
+    fail("Not yet implemented");
+  }
+
+  @Test
+  public void testUpdate() {
+    fail("Not yet implemented");
+  }
+
+  @Test
+  public void testDelete() {
+    fail("Not yet implemented");
+  }
+
+}
